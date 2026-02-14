@@ -1,0 +1,1 @@
+# Inverse-Kinematics-and-Dynamics-for-Rigid-Mechanical-Bodies
