@@ -57,11 +57,11 @@ MatrixXd pseudoinverse(VectorXd parameter, int iteration, MatrixXd initial_p, Ma
     MatrixXd dls = lambda * lambda * Ide;
 
     //Looping angle to approximate target location with the angle
-    MatrixXd rem;
+    MatrixXd res;
     for (int i = 0; i < iteration+1; i ++) {
         VectorXd temp(6); temp << 8.0e+0, 5.0e+0, 3.0e+0, angle_iter[0], angle_iter[1], angle_iter[2];
 
-        rem = alpha*((((JacobianT * Jacobian_iter) + dls).inverse() * JacobianT)*error);
+        res = alpha*((((JacobianT * Jacobian_iter) + dls).inverse() * JacobianT)*error);
         angle_iter = angle_iter + rem;
 
         Jacobian_iter = Jacobian(temp); 
@@ -74,7 +74,7 @@ MatrixXd pseudoinverse(VectorXd parameter, int iteration, MatrixXd initial_p, Ma
             << " , angles: " << angle_deg.transpose() 
             << " , position: " << current_position.transpose() << endl;
     }
-    return rem;
+    return res;
 }
 
 int main() {
@@ -85,3 +85,4 @@ int main() {
     pseudoinverse(parameter, 100, initial_p, Target - initial_p);
     return 1; 
 }
+
